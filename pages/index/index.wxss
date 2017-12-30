@@ -1,0 +1,128 @@
+/**index.wxss**/
+
+.topView {
+  width: 100%;
+  display: inline-block;
+}
+
+.userinfo {
+  width: 100%;
+  display: inline-block;
+  flex-direction: column;
+  align-items: left;
+  line-height: 72rpx;
+  background-color: #aaa;
+}
+
+.topBtn {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 12pt;
+}
+
+.topBtn .topItem {
+  width: 150rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  /**background-color: #aaa;**/
+  text-align: center;
+  margin: 20rpx;
+  border-radius: 5%;
+}
+
+.topBtn .topItemSlt {
+  width: 150rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  /**background-color: #6699e3 !important;**/
+  text-align: center;
+  margin: 20rpx;
+  border-radius: 5%;
+}
+
+.mainView {
+  vertical-align: center;
+  height: 600rpx;
+  width: 100%;
+  text-align: center;
+  line-height: 300rpx;
+  font-size: 26pt;
+  /**border: 1rpx solid green;**/
+}
+
+.userinfo-avatar {
+  width: 72rpx;
+  height: 72rpx;
+  margin: 10rpx;
+  border-radius: 50%;
+  float: left;
+}
+
+.userinfo-nickname {
+  color: #fff;
+  font-size: 12pt;
+  line-height: 90rpx;
+}
+
+.btnView {
+  padding: 20rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 30rpx solid #aaa;
+}
+
+.btnView button {
+  margin: 20rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ansView {
+  margin: 0rpx auto;
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 15pt;
+}
+
+.ansTitle {
+  display: inline-block;
+  justify-content: center;
+  line-height: 30rpx;
+}
+
+.userAns {
+  margin: 0rpx auto;
+  width: 300rpx;
+  height: 130rpx;
+  display: inline-block;
+  justify-content: center;
+  line-height: 130rpx;
+  border-bottom: 1rpx solid green;
+  font-size: 30pt;
+}
+
+.isRightCls {
+  color: darkgreen;
+  height: 130rpx;
+  display: inline-block;
+  justify-content: center;
+  line-height: 130rpx;
+  font-size: 30pt;
+}
+
+.isWrongCls {
+  color: Red;
+  height: 130rpx;
+  display: inline-block;
+  justify-content: center;
+  line-height: 130rpx;
+  font-size: 30pt;
+}

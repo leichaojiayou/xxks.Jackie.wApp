@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='topView'>
+    <view class="userinfo">
+      <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <block wx:else>
+        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      </block>
+    </view>
+    <view class="topBtn">
+      <button type="{{mop == '+'?'primary':'default'}}" class="{{mop == '+'?'topItemSlt':'topItem'}} " bindtap="sltPlus">加法</button>
+      <button type="{{mop == '-'?'primary':'default'}}" class="{{mop == '-'?'topItemSlt':'topItem'}} " bindtap="sltSubd">减法</button>
+      <button type="{{mop == '×'?'primary':'default'}}" class="{{mop == '×'?'topItemSlt':'topItem'}}" bindtap="sltMult">乘法</button>
+      <button type="{{mop == '÷'?'primary':'default'}}" class="{{mop == '÷'?'topItemSlt':'topItem'}} " bindtap="sltDivi">除法</button>
+    </view>
+  </view>
+  <view class="mainView">
+    <text class="proShow">{{mproText}}</text>
+    <view class='ansView'>
+      <!-- <text class='ansTitle'>答案：</text>-->
+      <input class='userAns' disabled='{{inputEnable}}' placeholder="输答案" bindinput="bindKeyInput" focus="{{inputFocus}}" type="number" bindconfirm="ansSubmit" bindfocus="focusInputEvent" placeholder-style='color:#eee;' value='{{inputValue}}' maxlength='3' bindblur='ansSubmit' confirm-type="done" />
+      <text class="{{isRight==true?'isRightCls':'isWrongCls'}}">{{infoTxt}}</text>
+    </view>
+  </view>
+
+  <view class="btnView">
+    <!-- <text class="user-motto">{{motto}}</text>-->
+    <button type='default' bindtap="showPro">出题</button>
+    <button type='default' bindtap="showAns">答案</button>
+  </view>
+</view>
