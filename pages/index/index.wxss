@@ -67,20 +67,30 @@
 }
 
 .btnView {
-  padding: 20rpx;
+  padding-bottom: 10rpx;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   border-bottom: 30rpx solid #aaa;
 }
 
-.btnView button {
-  margin: 20rpx;
-  width: 100%;
+.btnView view {
+  margin: 10rpx auto;
+  width: 96%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.btnView  .numBtn button {
+  width: 20%;
+  margin: 2rpx;
+}
+
+.btnView view button {
+  width: 30%;
+  margin: 2rpx;
 }
 
 .ansView {
@@ -90,6 +100,10 @@
   flex-direction: row;
   justify-content: center;
   font-size: 15pt;
+}
+
+.ansSide {
+  width: 50rpx;
 }
 
 .ansTitle {

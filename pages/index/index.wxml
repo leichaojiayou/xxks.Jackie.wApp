@@ -18,15 +18,27 @@
   <view class="mainView">
     <text class="proShow">{{mproText}}</text>
     <view class='ansView'>
-      <!-- <text class='ansTitle'>答案：</text>-->
-      <input class='userAns' disabled='{{inputEnable}}' placeholder="输答案" bindinput="bindKeyInput" focus="{{inputFocus}}" type="number" bindconfirm="ansSubmit" bindfocus="focusInputEvent" placeholder-style='color:#eee;' value='{{inputValue}}' maxlength='3' bindblur='ansSubmit' confirm-type="done" />
-      <text class="{{isRight==true?'isRightCls':'isWrongCls'}}">{{infoTxt}}</text>
+      <text class='ansTitle ansSide'></text>
+      <input class='userAns' disabled='true' placeholder="输答案" bindinput="bindKeyInput" focus="{{inputFocus}}" type="number" bindconfirm="ansSubmit" bindfocus="focusInputEvent" placeholder-style='color:#eee;' value='{{inputValue}}' maxlength='3'
+        bindblur='ansSubmit' confirm-type="done" />
+      <text class="ansSide {{isRight==true?'isRightCls':'isWrongCls'}}">{{infoTxt}}</text>
     </view>
   </view>
 
   <view class="btnView">
     <!-- <text class="user-motto">{{motto}}</text>-->
-    <button type='default' bindtap="showPro">出题</button>
-    <button type='default' bindtap="showAns">答案</button>
+    <view class='numBtn'>
+      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn1}}' bindtap="AnsInput">{{btn1}}</button>
+      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn2}}' bindtap="AnsInput">{{btn2}}</button>
+      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn3}}' bindtap="AnsInput">{{btn3}}</button>
+      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn4}}' bindtap="AnsInput">{{btn4}}</button>
+      <button type='warn' disabled='{{inputEnable}}' plain='true' bindtap="AnsClear">Del</button>
+    </view>
+    <view>
+      <button type='default' bindtap="showPro">{{inputEnable==true?'出题':'下一题'}}</button>
+      <button type='primary' bindtap="showAns" disabled='{{inputEnable}}'>答案</button>
+      <button type='default' bindtap="checkInput" disabled='{{inputEnable}}'>确定</button>
+    </view>
+
   </view>
 </view>

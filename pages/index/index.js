@@ -19,14 +19,18 @@ Page({
   data: {
     mproText: 'Ready',
     mop: "+",
-    isRight:false,
+    isRight: false,
     inputFocus: false,
-    infoTxt:'',
-    inputEnable:true,
-    inputValue:'',
+    infoTxt: '',
+    inputEnable: true,
+    inputValue: '',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    btn1: 1,
+    btn2: 2,
+    btn3: 3,
+    btn4: 4
   },
   //事件处理函数
   bindViewTap: function () {
@@ -149,13 +153,13 @@ Page({
     this.setData({ mproText: proText });
   },
   bindKeyInput: function (e) {
-    myAnsValue = e.detail.value;   
+    myAnsValue = e.detail.value;
   },
   ansSubmit: function () {
     this.checkInput();
-  }, 
+  },
   focusInputEvent: function (e) {
-    myAnsValue=-1;
+    myAnsValue = -1;
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
   },
@@ -169,11 +173,10 @@ Page({
     } else if (op === "÷") {
       ans = A / B;
     }
-   //console.log(myAnsValue);
-    if (myAnsValue.length===undefined)
-    {
+    //console.log(myAnsValue);
+    if (myAnsValue.length === undefined) {
       this.setData({ infoTxt: '' });
-    }else if (parseInt(myAnsValue) === parseInt(ans)) {
+    } else if (parseInt(myAnsValue) === parseInt(ans)) {
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
     }
@@ -181,6 +184,16 @@ Page({
       this.setData({ isRight: false });
       this.setData({ infoTxt: '✘' });
     }
-  }, 
-  
+  },
+  AnsInput: function (e) {
+    myAnsValue = this.data.inputValue;
+    myAnsValue += e.target.id;
+    this.setData({ inputValue: myAnsValue });
+  },
+  AnsClear: function () {
+    myAnsValue = -1;
+    this.setData({ inputValue: '' });
+    this.setData({ infoTxt: '' });
+  }
+
 })
