@@ -27,10 +27,10 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    btn1: 1,
-    btn2: 2,
-    btn3: 3,
-    btn4: 4
+    btn1: '1',
+    btn2: '2',
+    btn3: '3',
+    btn4: '4'
   },
   //事件处理函数
   bindViewTap: function () {
@@ -137,6 +137,7 @@ Page({
     this.setData({ inputEnable: false });
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
+    this.MakeNumBtn();
   },
   showAns: function () {
     if (op === "+") {
@@ -194,6 +195,42 @@ Page({
     myAnsValue = -1;
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
+  }, MakeNumBtn: function () {
+    function getRandomArrayElements(arr, count) {
+      var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+      while (i-- > min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+      }
+      return shuffled.slice(min);
+    }
+
+    if (op === "+") {
+      ans = A + B;
+    } else if (op === "-") {
+      ans = A - B;
+    } else if (op === "×") {
+      ans = A * B;
+    } else if (op === "÷") {
+      ans = A / B;
+    }
+    var nums = '0123456789'
+    var arrAns = [];
+
+    var temp = ans.toString().split('');
+    for (var i = 0; i < temp.length; i++) {
+      if (arrAns.indexOf(temp[i]) == -1) {
+        arrAns.push(temp[i]);
+      }
+      nums = nums.replace(temp[i], '');
+    }
+    arrAns = getRandomArrayElements(arrAns.concat(getRandomArrayElements(nums.split(''), 4 - arrAns.length)), 4);
+    this.setData({ btn1: arrAns[0] });
+    this.setData({ btn2: arrAns[1] });
+    this.setData({ btn3: arrAns[2] });
+    this.setData({ btn4: arrAns[3] });
   }
 
 })
