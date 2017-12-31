@@ -3,9 +3,15 @@
   <view class='topView'>
     <view class="userinfo">
       <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <block class='userBlock' wx:else>
+        <view style='float:left'>
+          <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </view>
+        <view style='float:right;'>
+          <text class="userinfo-nickname">{{mycoins}}</text>
+          <image class="userinfo-goldcoin" src="../images/goldcoin.png"></image>
+        </view>
       </block>
     </view>
     <view class="topBtn">
@@ -14,14 +20,16 @@
       <button type="{{mop == '×'?'primary':'default'}}" class="{{mop == '×'?'topItemSlt':'topItem'}}" bindtap="sltMult">乘法</button>
       <button type="{{mop == '÷'?'primary':'default'}}" class="{{mop == '÷'?'topItemSlt':'topItem'}} " bindtap="sltDivi">除法</button>
     </view>
-    <view class='switchView'>自动出题 <switch checked="{{proAuto}}" bindchange="switchChange"  disabled='{{inputEnable}}'/></view>
+    <view class='switchView'>自动出题
+      <switch checked="{{proAuto}}" bindchange="switchChange" disabled='{{inputEnable}}' />
+    </view>
   </view>
   <view class="mainView">
     <text class="proShow">{{mproText}}</text>
     <view class='ansView'>
       <text class='ansTitle ansSide'></text>
-      <input class='userAns' disabled='true' placeholder="输答案" bindinput="bindKeyInput" focus="{{inputFocus}}" type="number" bindconfirm="ansSubmit" bindfocus="focusInputEvent" placeholder-style='color:#eee;' value='{{inputValue}}' maxlength='3'
-        bindblur='ansSubmit' confirm-type="done" />
+      <input class='userAns' disabled='true' placeholder="输答案" bindinput="bindKeyInput" focus="{{inputFocus}}" type="number" bindconfirm="ansSubmit" bindfocus="focusInputEvent" placeholder-style='color:#eee;' value='{{inputValue}}' maxlength='3' bindblur='ansSubmit'
+        confirm-type="done" />
       <text class="ansSide {{isRight==true?'isRightCls':'isWrongCls'}}">{{infoTxt}}</text>
     </view>
   </view>
@@ -29,10 +37,10 @@
   <view class="btnView">
     <!-- <text class="user-motto">{{motto}}</text>-->
     <view class='numBtn'>
-      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn1}}' bindtap="AnsInput">{{btn1}}</button>
-      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn2}}' bindtap="AnsInput">{{btn2}}</button>
-      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn3}}' bindtap="AnsInput">{{btn3}}</button>
-      <button type='default' disabled='{{inputEnable}}'  plain='true' id='{{btn4}}' bindtap="AnsInput">{{btn4}}</button>
+      <button type='default' disabled='{{inputEnable}}' plain='true' id='{{btn1}}' bindtap="AnsInput">{{btn1}}</button>
+      <button type='default' disabled='{{inputEnable}}' plain='true' id='{{btn2}}' bindtap="AnsInput">{{btn2}}</button>
+      <button type='default' disabled='{{inputEnable}}' plain='true' id='{{btn3}}' bindtap="AnsInput">{{btn3}}</button>
+      <button type='default' disabled='{{inputEnable}}' plain='true' id='{{btn4}}' bindtap="AnsInput">{{btn4}}</button>
       <button type='warn' disabled='{{inputEnable}}' plain='true' bindtap="AnsClear">Del</button>
     </view>
     <view>

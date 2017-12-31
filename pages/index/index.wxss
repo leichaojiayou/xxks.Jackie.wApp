@@ -14,6 +14,20 @@
   background-color: #aaa;
 }
 
+.userBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.userBlock>view {
+  width: 300rpx;
+  display: inline-block;
+  line-height: 72rpx;
+  height: 72rpx;
+}
+
 .topBtn {
   width: 100%;
   display: flex;
@@ -59,7 +73,13 @@
   border-radius: 50%;
   float: left;
 }
-
+.userinfo-goldcoin{
+ width: 72rpx;
+  height: 72rpx;
+  margin: 10rpx;
+  border-radius: 10%;
+  float: right;
+}
 .userinfo-nickname {
   color: #fff;
   font-size: 12pt;
@@ -140,10 +160,12 @@
   line-height: 130rpx;
   font-size: 30pt;
 }
-.switchView{
+
+.switchView {
   text-align: right;
   padding: 10rpx;
 }
-.switchView switch{
+
+.switchView switch {
   height: 20rpx;
 }

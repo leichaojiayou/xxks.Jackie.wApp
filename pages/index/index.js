@@ -15,6 +15,7 @@ var proText = "";
 var op = "+";
 var ans = 0;
 var myAnsValue = -1;
+var proTimeStart, proTimeEnd;
 Page({
   data: {
     mproText: 'Ready',
@@ -31,7 +32,8 @@ Page({
     btn2: '2',
     btn3: '3',
     btn4: '4',
-    proAuto:false
+    proAuto: false,
+    mycoins: 0
   },
   //事件处理函数
   bindViewTap: function () {
@@ -40,6 +42,8 @@ Page({
     // })
   },
   onLoad: function () {
+    var coins=wx.getStorageSync('wx_mycoins');
+    this.setData({ mycoins: coins });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -66,6 +70,7 @@ Page({
         }
       })
     }
+   
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -139,6 +144,7 @@ Page({
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
     this.MakeNumBtn();
+    proTimeStart = new Date();
   },
   showAns: function () {
     if (op === "+") {
@@ -158,7 +164,7 @@ Page({
     myAnsValue = e.detail.value;
   },
   ansSubmit: function () {
-    this.checkInput();    
+    this.checkInput();
   },
   focusInputEvent: function (e) {
     myAnsValue = -1;
@@ -176,24 +182,56 @@ Page({
       ans = A / B;
     }
     //console.log(myAnsValue);
+
+    proTimeEnd = new Date();
+    var tsp = proTimeEnd.getTime() - proTimeStart.getTime();
+    //console.log(tsp);
     if (myAnsValue.length === undefined) {
       this.setData({ infoTxt: '' });
     } else if (parseInt(myAnsValue) === parseInt(ans)) {
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
+      var coins = this.data.mycoins;
+      if (tsp < 1000) {
+        coins = coins + 10;
+      } else if (tsp < 2000) {
+        coins = coins + 9;
+      } else if (tsp < 3000) {
+        coins = coins + 8;
+      } else if (tsp < 4000) {
+        coins = coins + 7;
+      } else if (tsp < 5000) {
+        coins = coins + 6;
+      } else if (tsp < 6000) {
+        coins = coins + 5;
+      } else if (tsp < 7000) {
+        coins = coins + 4;
+      } else if (tsp < 8000) {
+        coins = coins + 3;
+      } else if (tsp < 9000) {
+        coins = coins + 2;
+      } else if (tsp < 10000) {
+        coins = coins + 1;
+      }
+      else {
+        coins = coins + 1;
+      }
+
+      this.setData({ mycoins: coins });
+      wx.setStorageSync('wx_mycoins', coins);
       if (this.data.proAuto === true) {
         setTimeout(function () {
           this.showPro();
-        }.bind(this), 1000);
+        }.bind(this), 800);
       }
     }
     else {
       this.setData({ isRight: false });
-      this.setData({ infoTxt: '✘' }); 
+      this.setData({ infoTxt: '✘' });
       if (this.data.proAuto === true) {
-        setTimeout(function(){
+        setTimeout(function () {
           this.showPro();
-        }.bind(this), 1000);        
+        }.bind(this), 800);
       }
     }
   },
@@ -206,7 +244,7 @@ Page({
     myAnsValue = -1;
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
-  }, 
+  },
   MakeNumBtn: function () {
     function getRandomArrayElements(arr, count) {
       var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
@@ -243,10 +281,10 @@ Page({
     this.setData({ btn2: arrAns[1] });
     this.setData({ btn3: arrAns[2] });
     this.setData({ btn4: arrAns[3] });
-  }, 
-  switchChange:function(e){
-    this.setData({proAuto: e.detail.value});
-   
+  },
+  switchChange: function (e) {
+    this.setData({ proAuto: e.detail.value });
+
   }
 
 })
