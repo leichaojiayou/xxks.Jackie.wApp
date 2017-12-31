@@ -191,7 +191,7 @@ Page({
     } else if (parseInt(myAnsValue) === parseInt(ans)) {
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
-      var coins = this.data.mycoins;
+      var coins =parseInt(this.data.mycoins);
       if (tsp < 1000) {
         coins = coins + 10;
       } else if (tsp < 2000) {
