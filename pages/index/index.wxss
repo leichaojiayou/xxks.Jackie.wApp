@@ -140,3 +140,10 @@
   line-height: 130rpx;
   font-size: 30pt;
 }
+.switchView{
+  text-align: right;
+  padding: 10rpx;
+}
+.switchView switch{
+  height: 20rpx;
+}

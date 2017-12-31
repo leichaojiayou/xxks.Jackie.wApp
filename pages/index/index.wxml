@@ -14,6 +14,7 @@
       <button type="{{mop == '×'?'primary':'default'}}" class="{{mop == '×'?'topItemSlt':'topItem'}}" bindtap="sltMult">乘法</button>
       <button type="{{mop == '÷'?'primary':'default'}}" class="{{mop == '÷'?'topItemSlt':'topItem'}} " bindtap="sltDivi">除法</button>
     </view>
+    <view class='switchView'>自动出题 <switch checked="{{proAuto}}" bindchange="switchChange"  disabled='{{inputEnable}}'/></view>
   </view>
   <view class="mainView">
     <text class="proShow">{{mproText}}</text>

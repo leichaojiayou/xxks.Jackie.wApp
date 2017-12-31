@@ -30,7 +30,8 @@ Page({
     btn1: '1',
     btn2: '2',
     btn3: '3',
-    btn4: '4'
+    btn4: '4',
+    proAuto:false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -157,7 +158,7 @@ Page({
     myAnsValue = e.detail.value;
   },
   ansSubmit: function () {
-    this.checkInput();
+    this.checkInput();    
   },
   focusInputEvent: function (e) {
     myAnsValue = -1;
@@ -180,10 +181,20 @@ Page({
     } else if (parseInt(myAnsValue) === parseInt(ans)) {
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
+      if (this.data.proAuto === true) {
+        setTimeout(function () {
+          this.showPro();
+        }.bind(this), 1000);
+      }
     }
     else {
       this.setData({ isRight: false });
-      this.setData({ infoTxt: '✘' });
+      this.setData({ infoTxt: '✘' }); 
+      if (this.data.proAuto === true) {
+        setTimeout(function(){
+          this.showPro();
+        }.bind(this), 1000);        
+      }
     }
   },
   AnsInput: function (e) {
@@ -195,7 +206,8 @@ Page({
     myAnsValue = -1;
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
-  }, MakeNumBtn: function () {
+  }, 
+  MakeNumBtn: function () {
     function getRandomArrayElements(arr, count) {
       var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
       while (i-- > min) {
@@ -231,6 +243,10 @@ Page({
     this.setData({ btn2: arrAns[1] });
     this.setData({ btn3: arrAns[2] });
     this.setData({ btn4: arrAns[3] });
+  }, 
+  switchChange:function(e){
+    this.setData({proAuto: e.detail.value});
+   
   }
 
 })
