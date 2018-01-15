@@ -2,5 +2,5 @@
 
 
 <div>
-<img src="https://github.com/JackieZheng/xxks.Jackie.wApp/blob/master/pages/images/demo.png" width="70%">
+<img src="https://raw.githubusercontent.com/JackieZheng/xxks.Jackie.wApp/master/pages/images/demo.png" width="30%">
 </div>
