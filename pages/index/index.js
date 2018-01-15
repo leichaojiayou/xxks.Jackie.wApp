@@ -33,7 +33,9 @@ Page({
     btn3: '3',
     btn4: '4',
     proAuto: false,
-    mycoins: 0
+    mycoins: 0,
+    touch_start: null,
+    touch_end:null
   },
   //事件处理函数
   bindViewTap: function () {
@@ -42,7 +44,7 @@ Page({
     // })
   },
   onLoad: function () {
-    var coins=wx.getStorageSync('wx_mycoins');
+    var coins=wx.getStorageSync('wx_mycoins')||0;
     this.setData({ mycoins: coins });
     if (app.globalData.userInfo) {
       this.setData({
@@ -71,6 +73,22 @@ Page({
       })
     }
    
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '快来来和我PK下口算',
+      path: '/pages/index/index',
+      success: function (res) {
+        // 转发成功
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   },
   getUserInfo: function (e) {
     console.log(e)
@@ -192,32 +210,38 @@ Page({
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
       var coins =parseInt(this.data.mycoins);
+      var proCoins=0;
       if (tsp < 1000) {
-        coins = coins + 10;
+        proCoins = 10;
       } else if (tsp < 2000) {
-        coins = coins + 9;
+        proCoins = 9;
       } else if (tsp < 3000) {
-        coins = coins + 8;
+        proCoins = 8;
       } else if (tsp < 4000) {
-        coins = coins + 7;
+        proCoins =7;
       } else if (tsp < 5000) {
-        coins = coins + 6;
+        proCoins = 6;
       } else if (tsp < 6000) {
-        coins = coins + 5;
+        proCoins = 5;
       } else if (tsp < 7000) {
-        coins = coins + 4;
+        proCoins = 4;
       } else if (tsp < 8000) {
-        coins = coins + 3;
+        proCoins =3;
       } else if (tsp < 9000) {
-        coins = coins + 2;
+        proCoins = 2;
       } else if (tsp < 10000) {
-        coins = coins + 1;
+        proCoins =1;
       }
       else {
-        coins = coins + 1;
+         proCoins =1;
       }
-
+      coins = coins + proCoins;
       this.setData({ mycoins: coins });
+      wx.showToast({
+        title: '本题得分 ' + proCoins+' ！',
+        icon: 'success',
+        duration: 2000
+      })
       wx.setStorageSync('wx_mycoins', coins);
       if (this.data.proAuto === true) {
         setTimeout(function () {
@@ -285,6 +309,49 @@ Page({
   switchChange: function (e) {
     this.setData({ proAuto: e.detail.value });
 
+  }, 
+  clearIcons: function (event) {
+    let that = this;
+    //触摸时间距离页面打开的毫秒数  
+    var touchTime = that.data.touch_end - that.data.touch_start;
+    console.log(touchTime);
+    //如果按下时间大于350为长按  
+    if (touchTime > 350) {
+      wx.showModal({
+        title: '提示',
+        content: '是否清零金币？',
+        success: function (res) {
+          if (res.confirm) {
+            that.setData({mycoins: 0});
+            wx.setStorageSync('wx_mycoins', 0);
+            console.log(res)
+            wx.showToast({
+              title: '清除成功！',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        }
+      })
+    } else {
+      //
+    }
+  },
+  //按下事件开始  
+  mytouchstart: function (e) {
+    let that = this;
+    that.setData({
+      touch_start: e.timeStamp
+    })
+    console.log(e.timeStamp + '- touch-start')
+  },
+  //按下事件结束  
+  mytouchend: function (e) {
+    let that = this;
+    that.setData({
+      touch_end: e.timeStamp
+    })
+    console.log(e.timeStamp + '- touch-end')
   }
 
 })

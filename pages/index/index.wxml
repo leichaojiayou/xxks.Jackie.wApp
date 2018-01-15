@@ -8,7 +8,7 @@
           <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
         </view>
-        <view style='float:right;'>
+        <view style='float:right;' bindtouchstart="mytouchstart" bindtouchend="mytouchend" bindtap="clearIcons">
           <text class="userinfo-nickname">{{mycoins}}</text>
           <image class="userinfo-goldcoin" src="../images/goldcoin.png"></image>
         </view>
