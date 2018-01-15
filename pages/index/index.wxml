@@ -44,7 +44,7 @@
       <button type='warn' disabled='{{inputEnable}}' plain='true' bindtap="AnsClear">Del</button>
     </view>
     <view>
-      <button disabled='{{proAuto}}' type='default' bindtap="showPro">{{inputEnable==true?'出题':'下一题'}}</button>
+      <button disabled='{{proAuto}}' type='default' bindtap="showPro">{{inputEnable==true?'开始':'下一题'}}</button>
       <button type='primary' bindtap="showAns" disabled='{{inputEnable}}'>答案</button>
       <button type='default' bindtap="checkInput" disabled='{{inputEnable}}'>确定</button>
     </view>

@@ -159,10 +159,12 @@ Page({
     proText = A + op + B + "=?";
     this.setData({ mproText: proText });
     this.setData({ inputEnable: false });
+    myAnsValue = -1;
     this.setData({ inputValue: '' });
     this.setData({ infoTxt: '' });
     this.MakeNumBtn();
     proTimeStart = new Date();
+   
   },
   showAns: function () {
     if (op === "+") {
@@ -211,34 +213,31 @@ Page({
       this.setData({ infoTxt: '✔' });
       var coins =parseInt(this.data.mycoins);
       var proCoins=0;
-      if (tsp < 1000) {
+      if (tsp < 1500) {
         proCoins = 10;
-      } else if (tsp < 2000) {
+      } else if (tsp < 2500) {
         proCoins = 9;
-      } else if (tsp < 3000) {
+      } else if (tsp < 3500) {
         proCoins = 8;
-      } else if (tsp < 4000) {
+      } else if (tsp < 4500) {
         proCoins =7;
-      } else if (tsp < 5000) {
+      } else if (tsp < 5500) {
         proCoins = 6;
-      } else if (tsp < 6000) {
+      } else if (tsp < 6500) {
         proCoins = 5;
-      } else if (tsp < 7000) {
+      } else if (tsp < 7500) {
         proCoins = 4;
-      } else if (tsp < 8000) {
+      } else if (tsp < 8500) {
         proCoins =3;
-      } else if (tsp < 9000) {
+      } else if (tsp < 9500) {
         proCoins = 2;
-      } else if (tsp < 10000) {
-        proCoins =1;
-      }
-      else {
+      }else {
          proCoins =1;
       }
       coins = coins + proCoins;
       this.setData({ mycoins: coins });
       wx.showToast({
-        title: '本题得分 ' + proCoins+' ！',
+        title: '喜获 ' + proCoins+' 个金币', //标题最长7个字
         icon: 'success',
         duration: 2000
       })
@@ -308,6 +307,7 @@ Page({
   },
   switchChange: function (e) {
     this.setData({ proAuto: e.detail.value });
+    this.showPro();
 
   }, 
   clearIcons: function (event) {
