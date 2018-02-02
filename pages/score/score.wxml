@@ -1,0 +1,7 @@
+<!--score.wxml-->
+<view class="score-list">
+  <block wx:for="{{scores}}" wx:for-item="score">
+    <text class="score-item">{{index + 1}}. {{score.UserId}}</text>
+    <text class="score-item">{{score.UserScore}}金币</text>
+  </block>
+</view>

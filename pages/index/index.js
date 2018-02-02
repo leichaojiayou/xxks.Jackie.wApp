@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+var Bmob = require('../../utils/bmob.js');
 const app = getApp()
 var minA = 1,
   maxA = 99;
@@ -35,7 +36,7 @@ Page({
     proAuto: false,
     mycoins: 0,
     touch_start: null,
-    touch_end:null
+    touch_end: null
   },
   //事件处理函数
   bindViewTap: function () {
@@ -44,7 +45,7 @@ Page({
     // })
   },
   onLoad: function () {
-    var coins=wx.getStorageSync('wx_mycoins')||0;
+    var coins = wx.getStorageSync('wx_mycoins') || 0;
     this.setData({ mycoins: coins });
     if (app.globalData.userInfo) {
       this.setData({
@@ -72,7 +73,7 @@ Page({
         }
       })
     }
-   
+
   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
@@ -80,7 +81,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '快来来和我PK下口算',
+      title: '快来,来和我PK下口算。',
       path: '/pages/index/index',
       success: function (res) {
         // 转发成功
@@ -164,7 +165,7 @@ Page({
     this.setData({ infoTxt: '' });
     this.MakeNumBtn();
     proTimeStart = new Date();
-   
+
   },
   showAns: function () {
     if (op === "+") {
@@ -211,8 +212,8 @@ Page({
     } else if (parseInt(myAnsValue) === parseInt(ans)) {
       this.setData({ isRight: true });
       this.setData({ infoTxt: '✔' });
-      var coins =parseInt(this.data.mycoins);
-      var proCoins=0;
+      var coins = parseInt(this.data.mycoins);
+      var proCoins = 0;
       if (tsp < 1500) {
         proCoins = 10;
       } else if (tsp < 2500) {
@@ -220,7 +221,7 @@ Page({
       } else if (tsp < 3500) {
         proCoins = 8;
       } else if (tsp < 4500) {
-        proCoins =7;
+        proCoins = 7;
       } else if (tsp < 5500) {
         proCoins = 6;
       } else if (tsp < 6500) {
@@ -228,20 +229,21 @@ Page({
       } else if (tsp < 7500) {
         proCoins = 4;
       } else if (tsp < 8500) {
-        proCoins =3;
+        proCoins = 3;
       } else if (tsp < 9500) {
         proCoins = 2;
-      }else {
-         proCoins =1;
+      } else {
+        proCoins = 1;
       }
       coins = coins + proCoins;
       this.setData({ mycoins: coins });
       wx.showToast({
-        title: '喜获 ' + proCoins+' 个金币', //标题最长7个字
+        title: '喜获 ' + proCoins + ' 个金币', //标题最长7个字
         icon: 'success',
         duration: 2000
       })
       wx.setStorageSync('wx_mycoins', coins);
+      this.UpdateScore();
       if (this.data.proAuto === true) {
         setTimeout(function () {
           this.showPro();
@@ -309,7 +311,7 @@ Page({
     this.setData({ proAuto: e.detail.value });
     this.showPro();
 
-  }, 
+  },
   clearIcons: function (event) {
     let that = this;
     //触摸时间距离页面打开的毫秒数  
@@ -322,7 +324,7 @@ Page({
         content: '是否清零金币？',
         success: function (res) {
           if (res.confirm) {
-            that.setData({mycoins: 0});
+            that.setData({ mycoins: 0 });
             wx.setStorageSync('wx_mycoins', 0);
             console.log(res)
             wx.showToast({
@@ -335,6 +337,9 @@ Page({
       })
     } else {
       //
+      wx.navigateTo({
+        url: '../score/score'
+      })
     }
   },
   //按下事件开始  
@@ -352,6 +357,45 @@ Page({
       touch_end: e.timeStamp
     })
     console.log(e.timeStamp + '- touch-end')
+  },
+  UpdateScore: function () {
+    var Score = Bmob.Object.extend("UserScore");
+    var query = new Bmob.Query(Score);
+    console.log(app.globalData.userInfo.nickName.toString());
+    query.equalTo("UserId", app.globalData.userInfo.nickName.toString());
+    query.descending("UserScore");
+    query.find({ 
+      success: function (results) {
+        if (results.length>0)
+        {
+          results[0].set('UserScore', wx.getStorageSync('wx_mycoins') || 0);
+          results[0].save();
+        }
+        else{
+          var score = new Score();
+          score.set("UserId", app.globalData.userInfo.nickName.toString());
+          score.set("UserScore", wx.getStorageSync('wx_mycoins') || 0);
+          //添加数据，第一个入口参数是null
+          score.save(null, {
+            success: function (result) {
+              console.log("成功, objectId:" + result.id);
+            },
+            error: function (result, error) {
+
+            }
+          });
+        }
+       
+      },
+      error: function (result, error) {
+        console.log('更新失败'+error);
+        
+      }
+    });
+
+
   }
+
+
 
 })

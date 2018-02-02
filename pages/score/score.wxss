@@ -1,0 +1,11 @@
+.score-list {
+  display: flex;
+  flex-direction: row;
+  padding: 40rpx; 
+  align-items: left;
+  line-height: 72rpx;
+}
+.score-item {
+  margin: 10rpx;
+  width: 30%; 
+}

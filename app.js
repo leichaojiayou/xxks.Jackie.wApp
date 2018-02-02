@@ -1,4 +1,9 @@
 //app.js
+
+var Bmob = require('utils/bmob.js')
+var BmobSocketIo = require('utils/bmobSocketIo.js').BmobSocketIo;
+Bmob.initialize("bc072e66512cdb7365146f50ffbe7b5d", "68ec452646d7e4a38adf833c0c4f92a1");
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -34,6 +39,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    scores: []
   }
 })
