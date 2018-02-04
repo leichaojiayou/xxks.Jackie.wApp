@@ -1,11 +1,70 @@
 .score-list {
   display: flex;
+  flex-direction: column;
+  border: 0rpx solid green;
+  padding: 30rpx;
+}
+
+.score-block {
+  width: 100%;
+  display: flex;
   flex-direction: row;
-  padding: 40rpx; 
+  border: 0rpx solid grey;
+}
+
+.score-item {
+  width: 30%;
   align-items: left;
   line-height: 72rpx;
+  border: 0rpx solid red;
 }
-.score-item {
-  margin: 10rpx;
-  width: 30%; 
+
+.container_ {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0rpx 0;
+  box-sizing: border-box;
+}
+
+.p-title {
+  width: 100%;
+  font-size: 54rpx;
+  line-height: 72rpx;
+  padding: 10rpx;
+  background-color: #aaa;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.topView {
+  width: 100%;
+  display: inline-block;
+  height: 10%;
+  border: 0rpx solid green;
+}
+
+.mainView {
+  vertical-align: top;
+  width: 100%;
+  text-align: left;
+  height: 90%;
+  /** font-size: 26pt;
+ height: 600rpx;
+  border: 1rpx solid green;**/
+  border: 0rpx solid green;
+}
+
+.bottomView {
+  padding-bottom: 10rpx;
+  height: 0%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 30rpx solid #aaa;
+  background-color: green;
 }

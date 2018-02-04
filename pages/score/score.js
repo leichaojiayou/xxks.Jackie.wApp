@@ -4,12 +4,13 @@ var Bmob = require('../../utils/bmob.js');
 const app = getApp();
 Page({
   data: {
-    scores: [{ "UserId": "雪人", "UserScore": "200" }, { "UserId": "雪人", "UserScore": "300" }]
+    scores: []
   },
   onLoad: function () {
      
     var Score = Bmob.Object.extend("UserScore");
     var query = new Bmob.Query(Score);
+    query.descending("UserScore");
     var that=this;
     // 查询所有数据    
     query.find({

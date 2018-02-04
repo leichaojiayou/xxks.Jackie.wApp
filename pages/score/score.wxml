@@ -1,7 +1,24 @@
 <!--score.wxml-->
-<view class="score-list">
-  <block wx:for="{{scores}}" wx:for-item="score">
-    <text class="score-item">{{index + 1}}. {{score.UserId}}</text>
-    <text class="score-item">{{score.UserScore}}金币</text>
-  </block>
+
+
+
+<!--index.wxml-->
+<view class="container_">
+  <view class='topView'>
+  <text class="p-title">成绩排行榜</text>
+  </view>
+  <view class="mainView">
+    <view class="score-list">
+      <block wx:for="{{scores}}" wx:key="key" wx:for-item="score">
+        <view class="score-block">
+          <text class="score-item">{{index + 1}}. {{score.UserId}}</text>
+          <text class="score-item">{{score.UserScore}}金币</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="bottomView">
+
+  </view>
 </view>

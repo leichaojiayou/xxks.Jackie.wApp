@@ -17,6 +17,7 @@ var op = "+";
 var ans = 0;
 var myAnsValue = -1;
 var proTimeStart, proTimeEnd;
+var longTap = false;
 Page({
   data: {
     mproText: 'Ready',
@@ -312,35 +313,39 @@ Page({
     this.showPro();
 
   },
+  showScores: function (event) {
+    wx.navigateTo({
+      url: '../score/score'
+    })
+  },
   clearIcons: function (event) {
     let that = this;
     //触摸时间距离页面打开的毫秒数  
-    var touchTime = that.data.touch_end - that.data.touch_start;
-    console.log(touchTime);
+    // var touchTime = that.data.touch_end - that.data.touch_start;
+    //console.log(touchTime);
     //如果按下时间大于350为长按  
-    if (touchTime > 350) {
-      wx.showModal({
-        title: '提示',
-        content: '是否清零金币？',
-        success: function (res) {
-          if (res.confirm) {
-            that.setData({ mycoins: 0 });
-            wx.setStorageSync('wx_mycoins', 0);
-            console.log(res)
-            wx.showToast({
-              title: '清除成功！',
-              icon: 'success',
-              duration: 2000
-            })
-          }
+    // if (touchTime > 350) {
+    wx.showModal({
+      title: '提示',
+      content: '是否清零金币？',
+      success: function (res) {
+        if (res.confirm) {
+          that.setData({ mycoins: 0 });
+          wx.setStorageSync('wx_mycoins', 0);
+          this.UpdateScore();
+          console.log(res)
+          wx.showToast({
+            title: '清除成功！',
+            icon: 'success',
+            duration: 2000
+          })
         }
-      })
-    } else {
-      //
-      wx.navigateTo({
-        url: '../score/score'
-      })
-    }
+      }
+    })
+    //} else {
+    //
+
+    // }
   },
   //按下事件开始  
   mytouchstart: function (e) {
@@ -364,15 +369,16 @@ Page({
     console.log(app.globalData.userInfo.nickName.toString());
     query.equalTo("UserId", app.globalData.userInfo.nickName.toString());
     query.descending("UserScore");
-    query.find({ 
+    query.find({
       success: function (results) {
-        if (results.length>0)
-        {
+        if (results.length > 0) {
+          results[0].set("UserId", app.globalData.userInfo.nickName.toString());
           results[0].set('UserScore', wx.getStorageSync('wx_mycoins') || 0);
           results[0].save();
         }
-        else{
+        else {
           var score = new Score();
+          //score.set("wxopenid", app.globalData.userInfo.openId.toString());
           score.set("UserId", app.globalData.userInfo.nickName.toString());
           score.set("UserScore", wx.getStorageSync('wx_mycoins') || 0);
           //添加数据，第一个入口参数是null
@@ -385,11 +391,11 @@ Page({
             }
           });
         }
-       
+
       },
       error: function (result, error) {
-        console.log('更新失败'+error);
-        
+        console.log('更新失败' + error);
+
       }
     });
 
