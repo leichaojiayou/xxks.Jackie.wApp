@@ -366,8 +366,8 @@ Page({
   UpdateScore: function () {
     var Score = Bmob.Object.extend("UserScore");
     var query = new Bmob.Query(Score);
-    console.log(app.globalData.userInfo.nickName.toString());
-    query.equalTo("UserId", app.globalData.userInfo.nickName.toString());
+    console.log(app.globalData.opendId.toString());
+    query.equalTo("wxOpenId", app.globalData.opendId.toString());
     query.descending("UserScore");
     query.find({
       success: function (results) {
@@ -378,7 +378,7 @@ Page({
         }
         else {
           var score = new Score();
-          //score.set("wxopenid", app.globalData.userInfo.openId.toString());
+          score.set("wxOpenId", app.globalData.opendId.toString());
           score.set("UserId", app.globalData.userInfo.nickName.toString());
           score.set("UserScore", wx.getStorageSync('wx_mycoins') || 0);
           //添加数据，第一个入口参数是null

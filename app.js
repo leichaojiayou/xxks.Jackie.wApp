@@ -10,11 +10,26 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+ 
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          //发起网络请求
+        //console.log(res.code)
+
+          Bmob.User.requestOpenId(res.code, {
+            success: function (result) {
+              getApp().globalData.opendId = result.openid;
+              console.log(getApp().globalData.opendId )
+            },
+            error: function (error) {
+              // Show the error message somewhere
+              console.log("Error: " + error.code + " " + error.message);
+            }
+          })
+      }
       }        
     });
     // 获取用户信息
@@ -40,6 +55,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    scores: []
+    scores: [],
+    opendId:null
   }
 })

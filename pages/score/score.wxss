@@ -66,5 +66,5 @@
   flex-direction: column;
   justify-content: center;
   border-bottom: 30rpx solid #aaa;
-  background-color: green;
+  
 }
