@@ -66,5 +66,80 @@
   flex-direction: column;
   justify-content: center;
   border-bottom: 30rpx solid #aaa;
-  
+}
+
+page {
+  background-color: #fbf9fe;
+}
+
+.rank-item {
+  height: 140rpx;
+  background: #fff;
+  margin-bottom: 8rpx;
+  padding: 20rpx 20rpx 20rpx 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.rank-item .rank-img {
+  width: 100rpx;
+  height: 100rpx;
+  float: left;
+  margin-right: 50rpx;
+  position: relative;
+}
+
+.rank-item .rank-img image {
+  position: absolute;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  top: 0;
+  left: 0;
+}
+
+.rank-item .rank-name {
+  width: 150rpx;
+  font-size: 32rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #4e5b65;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-item .rank-score {
+  height: 100rpx;
+  width: 150rpx;
+  line-height: 100rpx;
+  font-size: 24rpx;
+  color: #d55a4a;
+  position: absolute;
+  text-align: center;
+  bottom: 20rpx;
+  right: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-item .rank-uv text {
+  font-size: 28rpx;
+  position: absolute;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  bottom: 20rpx;
+  right: 30rpx;
+  color: #777;
+}
+
+.rank-item .rank-uv image {
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  bottom: 20rpx;
+  right: 20rpx;
 }

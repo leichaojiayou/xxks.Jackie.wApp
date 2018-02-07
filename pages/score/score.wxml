@@ -5,18 +5,39 @@
 <!--index.wxml-->
 <view class="container_">
   <view class='topView'>
-  <text class="p-title">成绩排行榜</text>
+    <text class="p-title">成绩排行榜</text>
   </view>
-  <view class="mainView">
+  <scroll-view class="mainView" scroll-y="true">
     <view class="score-list">
       <block wx:for="{{scores}}" wx:key="key" wx:for-item="score">
+        <!--
+     
         <view class="score-block">
           <text class="score-item">{{index + 1}}. {{score.UserId}}</text>
           <text class="score-item">{{score.UserScore}}金币</text>
         </view>
       </block>
+-->
+        <!-- 循环体,每一行排名 -->
+        <view class="rank-item">
+
+          <!--头像-->
+          <view class="rank-img">
+            <image src="../images/unknow.png" wx:if="{{score.UserAvatarUrl==undefined}}" />
+            <image src="{{score.UserAvatarUrl}}" wx:if="{{score.UserAvatarUrl!=''}}" />
+          </view>
+          <view class="rank-name">{{score.UserId}}</view>
+          <view class="rank-score">{{score.UserScore}}　金币</view>
+          <!--排名-->
+          <view class="rank-uv">
+            <text wx:if="{{index + 1>3}}">第 {{index + 1}} 名</text>
+            <image src="../images/jp{{index + 1}}.png" wx:if="{{index + 1<=3}}" />
+          </view>
+        </view>
+
+      </block>
     </view>
-  </view>
+  </scroll-view>
 
   <view class="bottomView">
 

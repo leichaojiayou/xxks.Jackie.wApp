@@ -79,7 +79,7 @@ Page({
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
+      //console.log(res.target)
     }
     return {
       title: '快来,来和我PK下口算。',
@@ -93,7 +93,7 @@ Page({
     }
   },
   getUserInfo: function (e) {
-    console.log(e)
+    //console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
@@ -244,7 +244,7 @@ Page({
         duration: 2000
       })
       wx.setStorageSync('wx_mycoins', coins);
-      this.UpdateScore();
+      //this.UpdateScore();
       if (this.data.proAuto === true) {
         setTimeout(function () {
           this.showPro();
@@ -314,9 +314,10 @@ Page({
 
   },
   showScores: function (event) {
+    //this.UpdateScore();
     wx.navigateTo({
       url: '../score/score'
-    })
+    });
   },
   clearIcons: function (event) {
     let that = this;
@@ -332,8 +333,8 @@ Page({
         if (res.confirm) {
           that.setData({ mycoins: 0 });
           wx.setStorageSync('wx_mycoins', 0);
-          this.UpdateScore();
-          console.log(res)
+          //this.UpdateScore();
+          //console.log(res)
           wx.showToast({
             title: '清除成功！',
             icon: 'success',
@@ -366,7 +367,7 @@ Page({
   UpdateScore: function () {
     var Score = Bmob.Object.extend("UserScore");
     var query = new Bmob.Query(Score);
-    console.log(app.globalData.opendId.toString());
+    //console.log(app.globalData.opendId.toString());
     query.equalTo("wxOpenId", app.globalData.opendId.toString());
     query.descending("UserScore");
     query.find({
@@ -374,6 +375,7 @@ Page({
         if (results.length > 0) {
           results[0].set("UserId", app.globalData.userInfo.nickName.toString());
           results[0].set('UserScore', wx.getStorageSync('wx_mycoins') || 0);
+          results[0].set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
           results[0].save();
         }
         else {
@@ -381,10 +383,11 @@ Page({
           score.set("wxOpenId", app.globalData.opendId.toString());
           score.set("UserId", app.globalData.userInfo.nickName.toString());
           score.set("UserScore", wx.getStorageSync('wx_mycoins') || 0);
+          results[0].set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
           //添加数据，第一个入口参数是null
           score.save(null, {
             success: function (result) {
-              console.log("成功, objectId:" + result.id);
+              //console.log("成功, objectId:" + result.id);
             },
             error: function (result, error) {
 
@@ -394,7 +397,7 @@ Page({
 
       },
       error: function (result, error) {
-        console.log('更新失败' + error);
+        //console.log('更新失败' + error);
 
       }
     });

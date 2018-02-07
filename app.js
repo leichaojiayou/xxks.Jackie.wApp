@@ -22,7 +22,7 @@ App({
           Bmob.User.requestOpenId(res.code, {
             success: function (result) {
               getApp().globalData.opendId = result.openid;
-              console.log(getApp().globalData.opendId )
+              //console.log(getApp().globalData.opendId )
             },
             error: function (error) {
               // Show the error message somewhere
