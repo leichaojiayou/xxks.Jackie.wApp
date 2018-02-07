@@ -3,6 +3,7 @@
 
 
 <!--index.wxml-->
+<loading hidden="{{hiddenLoading}}">正在加载</loading>
 <view class="container_">
   <view class='topView'>
     <text class="p-title">成绩排行榜</text>

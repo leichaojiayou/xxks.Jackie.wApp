@@ -4,7 +4,8 @@ var Bmob = require('../../utils/bmob.js');
 const app = getApp();
 Page({
   data: {
-    scores: []
+    scores: [],
+    hiddenLoading:false
   },
   onLoad: function () {
 
@@ -56,7 +57,8 @@ Page({
           success: function (results) {
             //console.log("总数:" + results.length);
             that.setData({
-              scores: results
+              scores: results,
+              hiddenLoading:true
             })
             //console.log(results[0].UserAvatarUrl);
           },
