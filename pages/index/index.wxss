@@ -80,6 +80,13 @@
   border-radius: 10%;
   float: right;
 }
+.userinfo-tip
+{
+  color: #CCCDCC;
+  font-size: 32rpx;
+  line-height: 90rpx;
+  padding: 0rpx 10rpx;
+}
 .userinfo-nickname {
   color: #fff;
   font-size: 12pt;

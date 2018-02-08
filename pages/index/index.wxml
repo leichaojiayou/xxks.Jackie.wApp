@@ -8,7 +8,8 @@
           <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
           <text class="userinfo-nickname">{{userInfo.nickName}}</text>
         </view>
-        <view style='float:right;'  bindtap="showScores" bindlongpress="clearIcons">
+        <view style='float:right;' bindtap="showScores" bindlongpress="clearIcons">
+          <text class="userinfo-tip">点击查看排行榜</text>
           <text class="userinfo-nickname">{{mycoins}}</text>
           <image class="userinfo-goldcoin" src="../images/goldcoin.png"></image>
         </view>
