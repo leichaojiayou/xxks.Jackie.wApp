@@ -373,17 +373,18 @@ Page({
     query.find({
       success: function (results) {
         if (results.length > 0) {
-          results[0].set("UserId", app.globalData.userInfo.nickName.toString());
-          results[0].set('UserScore', wx.getStorageSync('wx_mycoins') || 0);
-          results[0].set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
-          results[0].save();
+          var score =results[0];
+          score.set("UserId", app.globalData.userInfo.nickName.toString());
+          score.set('UserScore', wx.getStorageSync('wx_mycoins') || 0);
+          score.set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
+          score.save();
         }
         else {
           var score = new Score();
           score.set("wxOpenId", app.globalData.opendId.toString());
           score.set("UserId", app.globalData.userInfo.nickName.toString());
           score.set("UserScore", wx.getStorageSync('wx_mycoins') || 0);
-          results[0].set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
+          score.set('UserAvatarUrl', app.globalData.userInfo.avatarUrl.toString());
           //添加数据，第一个入口参数是null
           score.save(null, {
             success: function (result) {
