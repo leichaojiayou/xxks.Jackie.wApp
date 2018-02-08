@@ -71,7 +71,11 @@
 page {
   background-color: #fbf9fe;
 }
-
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
 .rank-item {
   height: 140rpx;
   background: #fff;
