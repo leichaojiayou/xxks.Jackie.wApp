@@ -62,5 +62,6 @@ App({
     userInfo: null,
     scores: [],
     opendId:null
-  }
+  },
+  
 })

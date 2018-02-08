@@ -9,5 +9,22 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "小学生口算练习",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar_": {
+    "color": "#666666",
+    "selectedColor": "#08A032",
+    "position": "bottom",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index"
+       
+      },
+      {
+        "text": "排行榜",
+        "pagePath": "pages/score/score"
+        
+      }
+    ]
   }
 }

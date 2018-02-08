@@ -74,7 +74,10 @@ Page({
         }
       })
     }
-
+    
+  },
+  onUnload: function () {
+    this.UpdateScore();
   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
