@@ -7,7 +7,7 @@ var BmobSocketIo = require('utils/bmobSocketIo.js').BmobSocketIo;
 提示：后台数据服务用的第三方服务Bmob，请自行申请。
 Bmob.initialize("你的Application ID", "你的REST API Key");
 **/
-Bmob.initialize("bc072e66512cdb7365146f50ffbe7b5d", "68ec452646d7e4a38adf833c0c4f92a1");
+Bmob.initialize("", "");
 
 App({
   onLaunch: function () {
